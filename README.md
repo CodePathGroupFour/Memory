@@ -1,6 +1,9 @@
 # recipeApp
+
 ##User Stories
+
 **REQUIRED**
+
 1. Launch Screen for the App.
 2. User can enter in ingredients in their house and search for available recipes that match the ingredients.
 3. Gives a list of recipes with a priority system.
@@ -10,9 +13,17 @@
   4.  SO ONN ..
 
 **OPTIONAL**
+
 1. User can search for location of local grocery store with their current location
 2. User can login with social media to share the recipe
 3. Random button to get the app to randomly pick a recipe from your search list and advise you on making it.
+
+## Video Walkthrough 
+
+Here's a walkthrough of implemented user stories:
+
+<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 ## License
 
