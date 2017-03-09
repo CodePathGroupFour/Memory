@@ -1,22 +1,26 @@
-# recipeApp
+# TouristApp
+TouristApp suggests places for users to visit -- points of interests (POI). to users to visit. And a POI is given value by users via the `memories` (i.e. images, videos, etc.) that a user would upload and associate with the POI.
 
 ##User Stories
 
-**REQUIRED**
+### **REQUIRED**
 
-1. Launch Screen for the App.
-2. User can enter in ingredients in their house and search for available recipes that match the ingredients.
-3. Gives a list of recipes with a priority system.
-  1. Top Recipe - User has all the ingredients
-  2. Second - User has most of the ingredients
-  3. Third - User has half the ingredients
-  4.  SO ONN ..
+1. User can log in with his social media account like Facebook, Twitter, etc.
 
-**OPTIONAL**
+2. User can see the recommended places according to the location he is at or he searches      
+   - The recommended locations can be switch between a tableView or a map view
 
-1. User can search for location of local grocery store with their current location
-2. User can login with social media to share the recipe
-3. Random button to get the app to randomly pick a recipe from your search list and advise you on making it.
+3. User can read the memories other users post about a certain location
+
+4. User can see other user’s profile or public memories by clicking other user’s profile picture
+
+5. User can modify his own profile and read his memories
+
+### **OPTIONAL**
+
+
+### Wire-Framing
+[Youtube Link Goes Here](https://www.youtube.com/watch?v=ZRsC18d1Wfg&feature=youtu.be)
 
 ## Video Walkthrough 
 
