@@ -18,6 +18,9 @@ TouristApp suggests places for users to visit -- points of interests (POI). to u
 
 ### **OPTIONAL**
 
+### API's
+* Facebok graphic api
+* Google Maps
 
 ### Wire-Framing
 <a href='https://www.youtube.com/watch?v=ZRsC18d1Wfg&feature=youtu.be'><img src='http://i.imgur.com/wQkVf5N.jpg' title='Sample Wire-Framing on Youtube' width='' alt='Sample Wire-Framing on Youtube'/></a>
