@@ -83,11 +83,12 @@ class HomeViewController: UIViewController {
     }
     
     func loadData(){
-       /* let request = FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id,name,taggable_friends{name,picture.type(large)}"], httpMethod: "GET")
+        let request = FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id,name,taggable_friends{name,picture.type(large)}"], httpMethod: "GET")
         request?.start(completionHandler: {(connection, result, error) -> Void in
             // Insert your code here
             print(result)
-        })*/
+            print("!!!!!!!!!")
+        })
 
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13B64F621E88395A00913B4B /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B64F611E88395A00913B4B /* CameraViewController.swift */; };
 		2CB9E66EF74CA35897075DB8 /* Pods_SnapMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EA1322605CA4E918EBD4F7 /* Pods_SnapMap.framework */; };
 		9608B3511E78BE80008CFECB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9608B3501E78BE80008CFECB /* AppDelegate.swift */; };
 		9608B3561E78BE80008CFECB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9608B3541E78BE80008CFECB /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13B64F611E88395A00913B4B /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		34EA1322605CA4E918EBD4F7 /* Pods_SnapMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9608B34D1E78BE80008CFECB /* SnapMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9608B3501E78BE80008CFECB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				96664D0F1E82187B00BEE7F6 /* LoginViewController.swift */,
 				96664D111E821EA500BEE7F6 /* HomeViewController.swift */,
 				9622E8671E863F3C001B25B2 /* ProfileViewController.swift */,
+				13B64F611E88395A00913B4B /* CameraViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -142,7 +145,7 @@
 				TargetAttributes = {
 					9608B34C1E78BE80008CFECB = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7LZ5PJQBQU;
+						DevelopmentTeam = 49Z4SH39X3;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96664D101E82187C00BEE7F6 /* LoginViewController.swift in Sources */,
+				13B64F621E88395A00913B4B /* CameraViewController.swift in Sources */,
 				9608B3511E78BE80008CFECB /* AppDelegate.swift in Sources */,
 				9622E8681E863F3C001B25B2 /* ProfileViewController.swift in Sources */,
 				96664D121E821EA500BEE7F6 /* HomeViewController.swift in Sources */,
@@ -363,14 +367,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SnapMap/SnapMap.entitlements;
-				DEVELOPMENT_TEAM = 7LZ5PJQBQU;
+				DEVELOPMENT_TEAM = 49Z4SH39X3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/",
 				);
 				INFOPLIST_FILE = SnapMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.HelloWorld.Jason.SnapMap;
+				PRODUCT_BUNDLE_IDENTIFIER = SnapMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -382,14 +387,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SnapMap/SnapMap.entitlements;
-				DEVELOPMENT_TEAM = 7LZ5PJQBQU;
+				DEVELOPMENT_TEAM = 49Z4SH39X3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/",
 				);
 				INFOPLIST_FILE = SnapMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.HelloWorld.Jason.SnapMap;
+				PRODUCT_BUNDLE_IDENTIFIER = SnapMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
