@@ -8,6 +8,10 @@
 
 import UIKit
 import AVFoundation
+import FBSDKCoreKit
+import FirebaseAuth
+import FirebaseStorage
+import Firebase
 
 class CameraViewController: UIViewController {
 
@@ -81,6 +85,37 @@ class CameraViewController: UIViewController {
                     let captureImage = UIImage(cgImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.right)
                     
                     self.captureImageView.image = captureImage
+                    
+                    let imageName = NSUUID().uuidString
+                    
+                    
+//                    guard let uid = user?.uid else {
+//                        return
+//                    }
+                    
+                    // Create a reference to the file you want to upload
+                    let storageRef = FIRStorage.storage().reference().child("\(imageName).png")
+                    //.child("images/rivers.jpg")
+                    
+                    if let uploadData = UIImagePNGRepresentation(captureImage) {
+                            storageRef.put(uploadData, metadata: nil) { metadata, error in
+                            if let error = error {
+                                // Uh-oh, an error occurred!
+                                print(error.localizedDescription)
+                            } else {
+                                // Metadata contains file metadata such as size, content-type, and download URL.
+                                let postImageURL = metadata!.downloadURL()
+//                                if let postImageURL = metadata!.downloadURL()?.absoluteString {
+//                                    let value = ["postImageURL": postImageURL]
+//                                    
+//                                    self.registerUserIntoDataBaseWithUID(uid, values: value)
+//                                }
+                            }
+                        }
+                    }
+                    
+                    
+                
                 }
             })
         }
