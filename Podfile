@@ -13,6 +13,7 @@ target 'SnapMap' do
   	pod 'FBSDKCoreKit'
     pod 'FBSDKShareKit'
     pod 'FBSDKLoginKit'
-	  
+
+    pod 'AFNetworking'
 
 end

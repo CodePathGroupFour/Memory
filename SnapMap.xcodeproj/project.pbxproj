@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		13B64F621E88395A00913B4B /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B64F611E88395A00913B4B /* CameraViewController.swift */; };
 		2CB9E66EF74CA35897075DB8 /* Pods_SnapMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EA1322605CA4E918EBD4F7 /* Pods_SnapMap.framework */; };
+		79C480A01E8C54A7005D67D6 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4809F1E8C54A7005D67D6 /* LocationViewController.swift */; };
+		79C480A31E8C5573005D67D6 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C480A21E8C5573005D67D6 /* LocationCell.swift */; };
+		79C480A51E8C5682005D67D6 /* PhotoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C480A41E8C5682005D67D6 /* PhotoMapViewController.swift */; };
 		9608B3511E78BE80008CFECB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9608B3501E78BE80008CFECB /* AppDelegate.swift */; };
 		9608B3561E78BE80008CFECB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9608B3541E78BE80008CFECB /* Main.storyboard */; };
 		9608B3581E78BE80008CFECB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9608B3571E78BE80008CFECB /* Assets.xcassets */; };
@@ -22,6 +25,9 @@
 /* Begin PBXFileReference section */
 		13B64F611E88395A00913B4B /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		34EA1322605CA4E918EBD4F7 /* Pods_SnapMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79C4809F1E8C54A7005D67D6 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		79C480A21E8C5573005D67D6 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		79C480A41E8C5682005D67D6 /* PhotoMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMapViewController.swift; sourceTree = "<group>"; };
 		9608B34D1E78BE80008CFECB /* SnapMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnapMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9608B3501E78BE80008CFECB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9608B3551E78BE80008CFECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,6 +72,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		79C480A11E8C5551005D67D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				79C480A21E8C5573005D67D6 /* LocationCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		9608B3441E78BE80008CFECB = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +101,7 @@
 		9608B34F1E78BE80008CFECB /* SnapMap */ = {
 			isa = PBXGroup;
 			children = (
+				79C480A11E8C5551005D67D6 /* Views */,
 				967B63621E82024400923F28 /* ViewControllers */,
 				96DEF6511E7F345400BC3745 /* SnapMap.entitlements */,
 				9608B3501E78BE80008CFECB /* AppDelegate.swift */,
@@ -106,6 +121,8 @@
 				96664D111E821EA500BEE7F6 /* HomeViewController.swift */,
 				9622E8671E863F3C001B25B2 /* ProfileViewController.swift */,
 				13B64F611E88395A00913B4B /* CameraViewController.swift */,
+				79C4809F1E8C54A7005D67D6 /* LocationViewController.swift */,
+				79C480A41E8C5682005D67D6 /* PhotoMapViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -243,7 +260,10 @@
 				96664D101E82187C00BEE7F6 /* LoginViewController.swift in Sources */,
 				13B64F621E88395A00913B4B /* CameraViewController.swift in Sources */,
 				9608B3511E78BE80008CFECB /* AppDelegate.swift in Sources */,
+				79C480A01E8C54A7005D67D6 /* LocationViewController.swift in Sources */,
+				79C480A31E8C5573005D67D6 /* LocationCell.swift in Sources */,
 				9622E8681E863F3C001B25B2 /* ProfileViewController.swift in Sources */,
+				79C480A51E8C5682005D67D6 /* PhotoMapViewController.swift in Sources */,
 				96664D121E821EA500BEE7F6 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
