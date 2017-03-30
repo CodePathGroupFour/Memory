@@ -26,13 +26,13 @@ TouristApp suggests places for users to visit -- points of interests (POI). to u
 <a href='https://www.youtube.com/watch?v=ZRsC18d1Wfg&feature=youtu.be'><img src='http://i.imgur.com/wQkVf5N.jpg' title='Sample Wire-Framing on Youtube' width='' alt='Sample Wire-Framing on Youtube'/></a>
 
 ### Data Schema
-![Data Schema Models](http://i.imgur.com/1Dqwk8r.jpg)
+<img src='http://i.imgur.com/1Dqwk8r.jpg' title='Video Walkthrough' width='400' alt='Video Walkthrough' />
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/u3jguYs.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
 ## License
