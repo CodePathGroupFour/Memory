@@ -25,7 +25,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var stillImageOutput: AVCaptureStillImageOutput?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     
+
     var pickedImage:UIImage!
+
+    let user = FIRAuth.auth()?.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,27 +105,29 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     let imageName = NSUUID().uuidString
                     
                     
-//                    guard let uid = user?.uid else {
-//                        return
-//                    }
+                    guard let uid = self.user?.uid else {
+                        return
+                    }
                     
                     // Create a reference to the file you want to upload
-                    let storageRef = FIRStorage.storage().reference().child("\(imageName).png")
-                    //.child("images/rivers.jpg")
+                    var storageRef = FIRStorage.storage().reference().child("\(imageName).png")
                     
                     if let uploadData = UIImagePNGRepresentation(captureImage) {
+                        //let uid = self.user?.uid
                             storageRef.put(uploadData, metadata: nil) { metadata, error in
                             if let error = error {
                                 // Uh-oh, an error occurred!
                                 print(error.localizedDescription)
+                                print("?????????")
                             } else {
                                 // Metadata contains file metadata such as size, content-type, and download URL.
+                                print("upload seccessfully!")
                                 let postImageURL = metadata!.downloadURL()
-//                                if let postImageURL = metadata!.downloadURL()?.absoluteString {
-//                                    let value = ["postImageURL": postImageURL]
-//                                    
-//                                    self.registerUserIntoDataBaseWithUID(uid, values: value)
-//                                }
+                                if let postImageURL = metadata!.downloadURL()?.absoluteString {
+                                    let value = ["postImageURL": postImageURL]
+                                    
+                                   self.registerUserIntoDataBaseWithUID(uid: uid, values: value as [String : AnyObject])
+                                }
                             }
                         }
                     }
@@ -133,7 +138,22 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             })
         }
         
+
     }//func takePhotoButton
+    
+    private func registerUserIntoDataBaseWithUID(uid:String, values:[String:AnyObject]) {
+        let ref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
+        let userRef = ref.child("user").child(uid)
+        userRef.updateChildValues(values,withCompletionBlock: {
+            (err,ref) in
+            if err != nil {
+                print(err?.localizedDescription)
+                return
+            }
+            
+//            self.dismiss(animated: true, completion: nil)
+        })
+    }
 
     /*
     // MARK: - Navigation
