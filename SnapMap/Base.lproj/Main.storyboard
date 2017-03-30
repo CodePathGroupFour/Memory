@@ -88,7 +88,7 @@
             </objects>
             <point key="canvasLocation" x="1780" y="37.331334332833585"/>
         </scene>
-        <!--Camera-->
+        <!--Camera View Controller-->
         <scene sceneID="Ohs-A9-Dr5">
             <objects>
                 <viewController id="ceg-KF-9w3" customClass="CameraViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -137,7 +137,7 @@
                             <constraint firstItem="82E-ag-ujq" firstAttribute="top" secondItem="VpO-2z-SSc" secondAttribute="top" id="rBg-qd-7w6"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Camera" id="ei6-dI-h6J"/>
+                    <navigationItem key="navigationItem" id="9g2-72-vvc"/>
                     <connections>
                         <outlet property="captureImageView" destination="2eR-AJ-Ofz" id="rzU-Wb-ebA"/>
                         <outlet property="mapView" destination="DWI-cX-DOI" id="QbA-mt-DBX"/>
@@ -147,7 +147,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEl-5g-XKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2696.8000000000002" y="37.331334332833585"/>
+            <point key="canvasLocation" x="3636" y="37.331334332833585"/>
         </scene>
         <!--Add Location-->
         <scene sceneID="Fg9-lD-7Yu">
@@ -222,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6o4-PA-vwQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3420" y="36.431784107946029"/>
+            <point key="canvasLocation" x="4359.1999999999998" y="36.431784107946029"/>
         </scene>
         <!--Profile-->
         <scene sceneID="EQr-vE-avu">
@@ -250,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K3p-sK-ONN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783.2" y="698.5007496251875"/>
+            <point key="canvasLocation" x="1780" y="799"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Jrt-ui-DRA">
@@ -265,12 +265,31 @@
                     <connections>
                         <segue destination="MNJ-AN-2du" kind="relationship" relationship="viewControllers" id="A4m-by-PuX"/>
                         <segue destination="ybw-Db-eOD" kind="relationship" relationship="viewControllers" id="gly-SC-qOY"/>
-                        <segue destination="ceg-KF-9w3" kind="relationship" relationship="viewControllers" id="isi-ck-bZ4"/>
+                        <segue destination="ZcQ-sl-bjW" kind="relationship" relationship="viewControllers" id="isi-ck-bZ4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wvz-Na-nh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="840.79999999999995" y="37.331334332833585"/>
+        </scene>
+        <!--Camera-->
+        <scene sceneID="eas-zt-fur">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZcQ-sl-bjW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Camera" id="ei6-dI-h6J"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WN3-ib-rjm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ceg-KF-9w3" kind="relationship" relationship="rootViewController" id="Zvx-2n-zsF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOa-Yq-Tg1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2696.8000000000002" y="37.331334332833585"/>
         </scene>
     </scenes>
     <resources>
