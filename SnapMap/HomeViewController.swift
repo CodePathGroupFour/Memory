@@ -12,14 +12,16 @@ import FirebaseAuth
 import FirebaseStorage
 import Firebase
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet weak var profileimg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var testTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        testTableView.isHidden = true
         // Do any additional setup after loading the view.
         
         if FIRAuth.auth()?.currentUser != nil {
@@ -92,8 +94,29 @@ class HomeViewController: UIViewController {
 
     }
     
-
-    /*
+    @IBAction func testButton(_ sender: UIButton) {
+        profileimg.isHidden = true
+        nameLabel.isHidden = true
+        testTableView.isHidden = false
+        
+    }
+    
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    
+    // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+    // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+    
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell") as! HomeViewCell
+        
+        return cell
+    }
+        /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
