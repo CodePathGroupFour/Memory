@@ -11,50 +11,21 @@ import FBSDKCoreKit
 import FirebaseAuth
 import FirebaseStorage
 import Firebase
+import FirebaseDatabase
 
 class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
     
-    @IBOutlet weak var profileimg: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var testTableView: UITableView!
+    @IBOutlet var tableView: UITableView!
+    
+    var snapUsers = [User]()
+    var snapPosts = [Post]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
-        testTableView.isHidden = true
-        // Do any additional setup after loading the view.
         
-        if FIRAuth.auth()?.currentUser != nil {
-            // User is signed in.
-            let user = FIRAuth.auth()?.currentUser
-            let name = user?.displayName
-          //  let email = user?.email
-          //  let uid = user?.uid
-            let photoURL = user?.photoURL
-            
-            self.nameLabel.text = name
-            
-            let img = NSData(contentsOf: photoURL!)
-            self.profileimg.image = UIImage(data: img! as Data)
-            
-            
-            //stores it into db
-            
-            var storage = FIRStorage.storage()
-            
-            // Get a non-default Storage bucket
-          //  let storageRef = storage.reference(forURL: "gs://snapmap-e45c3.appspot.com/")
-            
-          //  let request = FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id,name,taggable_friends{name,picture.type(large)}"], httpMethod: "GET")
-          //  request?.start(completionHandler: {(connection, result, error) -> Void in
-         //   })
-            
-            
-            
-        } else {
-            // No user is signed in.
-        }
-        
+        retrieveUsers()
+        retrievePosts()
         
         
     }
@@ -63,6 +34,50 @@ class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDel
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func retrieveUsers()
+    {
+        FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
+            if let userdictionary = snapshot.value as? [String: Any]
+            {
+                let user = User()
+                
+//                print(snapshot.value)
+                user.name = userdictionary["name"] as! String
+                user.email = userdictionary["email"] as? String
+                user.profileURL = userdictionary["profileURL"] as? String
+                
+                self.snapUsers.append(user)
+                //print("user count is : \(self.snapUsers.count)")
+            }
+        })
+    }
+    
+    func retrievePosts()
+    {
+        FIRDatabase.database().reference().child("Post").observe(.childAdded, with: { (snapshot) in
+            if let Postdictionary = snapshot.value as? [String: Any]
+            {
+                let post = Post()
+                for childSnap in  snapshot.children.allObjects
+                {
+                    let snap = childSnap as! FIRDataSnapshot
+                    if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? NSDictionary
+                    {
+//                        print(snapVal)
+                        post.latitude = snapVal["latitude"] as! Double
+                        post.longitude = snapVal["longitude"] as! Double
+                        post.postId = snapVal["postId"] as! String
+                        self.snapPosts.append(post)
+//                        print(self.snapPosts[0].latitude)
+//                        print(self.snapPosts[0].longitude)
+//                        print(self.snapPosts[0].postId)
+                    }
+                }
+            }
+        })
+    }
+    
     
     @IBAction func logoutBtnClicked(_ sender: Any) {
         
@@ -84,31 +99,11 @@ class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDel
     
     }
     
-    func loadData(){
-        let request = FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id,name,taggable_friends{name,picture.type(large)}"], httpMethod: "GET")
-        request?.start(completionHandler: {(connection, result, error) -> Void in
-            // Insert your code here
-            print(result)
-            print("!!!!!!!!!")
-        })
-
-    }
-    
-    @IBAction func testButton(_ sender: UIButton) {
-        profileimg.isHidden = true
-        nameLabel.isHidden = true
-        testTableView.isHidden = false
-        
-    }
-    
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return snapUsers.count
     }
     
-    
-    // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-    // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
     
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

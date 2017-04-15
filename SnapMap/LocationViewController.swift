@@ -17,9 +17,6 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     weak var delegate: LocationsViewControllerDelegate!
     
-    
-    
-    // TODO: Fill in actual CLIENT_ID and CLIENT_SECRET
     let CLIENT_ID = "QA1L0Z0ZNA2QVEEDHFPQWK0I5F1DE3GPLSNW4BZEBGJXUCFL"
     let CLIENT_SECRET = "W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH21ZCPUMCU"
     

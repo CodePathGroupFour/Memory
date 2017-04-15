@@ -10,6 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FirebaseAuth
+import Firebase
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var FBLoginButton: FBSDKLoginButton!
@@ -55,10 +56,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if error != nil
         {
             print(error.localizedDescription)
-        }else if result.isCancelled {
-            
         }
-        else
+        else if result.isCancelled
+        {
+        }else
         {
             //loginSuccess = true
             self.FBLoginButton.isHidden = true
@@ -66,7 +67,32 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             FIRAuth.auth()?.signIn(with: credential)
             { (user, error) in
-                print(error?.localizedDescription ?? "user logged in with Firebase!")
+                if error == nil
+                {
+                    print("user logged in with Firebase!")
+                    //add ref to db if first time log in
+                    let ref = FIRDatabase.database().reference().child("Users")
+                    let currentUser = FIRAuth.auth()?.currentUser
+                    let uid = currentUser?.uid
+                    
+                    ref.observe(FIRDataEventType.value, with: { (snapshot) in
+                        if snapshot.hasChild("userid: \(uid!)") {}
+                        else
+                        {
+//                            ref.child("userid: \(uid!)")
+                            ref.child("userid: \(uid!)").child("name").setValue("\(currentUser!.displayName!)")
+                            ref.child("userid: \(uid!)").child("profileURL").setValue("\(currentUser!.photoURL!)")
+                            ref.child("userid: \(uid!)").child("email").setValue("\(currentUser!.email)")
+                        }
+                    })
+                    
+                    
+                    
+                }else
+                {
+                    print(error!.localizedDescription)
+                }
+
             }
         }
     }

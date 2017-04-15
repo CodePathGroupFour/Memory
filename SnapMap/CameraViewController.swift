@@ -25,9 +25,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var stillImageOutput: AVCaptureStillImageOutput?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     
-
     var pickedImage:UIImage!
-
+    var PostId: String!
+    
+    var dbref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
     let user = FIRAuth.auth()?.currentUser
     
     override func viewDidLoad() {
@@ -194,6 +195,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "tagSegue", sender: self)
         let imageName = NSUUID().uuidString
+        self.PostId = imageName
         
         
                             guard let uid = self.user?.uid else {
@@ -209,16 +211,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                                     if let error = error {
                                         // Uh-oh, an error occurred!
                                         print(error.localizedDescription)
-                                        print("?????????")
                                     } else {
                                         // Metadata contains file metadata such as size, content-type, and download URL.
                                         print("upload seccessfully!")
-                                        let postImageURL = metadata!.downloadURL()
-                                        if let postImageURL = metadata!.downloadURL()?.absoluteString {
-                                            let value = ["postImageURL": postImageURL]
-        
-                                           self.registerUserIntoDataBaseWithUID(uid: uid, values: value as [String : AnyObject])
-                                        }
+//                                        if let postImageURL = metadata!.downloadURL()?.absoluteString {
+//                                            let value = ["storageID \(imageName)"]
+//        
+//                                           self.registerUserIntoDataBaseWithUID(uid: uid, values: value as String)
+//                                          
+//                                        }
+                                        
                                     }
                                 }
                             }
@@ -226,12 +228,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 }
         
             private func registerUserIntoDataBaseWithUID(uid:String, values:[String:AnyObject]) {
-                let ref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
-                let userRef = ref.child("user").child(uid)
-                userRef.updateChildValues(values,withCompletionBlock: {
+                let PostRef = self.dbref.child("Post").child(uid)
+                PostRef.updateChildValues(values,withCompletionBlock: {
                     (err,ref) in
                     if err != nil {
-                        print(err?.localizedDescription)
+                        print(err!.localizedDescription)
                         return
                     }
                     
@@ -252,6 +253,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         annotation.coordinate = locationCoordinate
         annotation.title = String(describing: latitude)
         mapView.addAnnotation(annotation)
+        
+        let geoRef = dbref.child("Post").child("userid: \(user!.uid)")
+        geoRef.child("location").child("longitude").setValue(longitude)
+        geoRef.child("location").child("latitude").setValue(latitude)
+        geoRef.child("location").child("postId").setValue(self.PostId!)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
