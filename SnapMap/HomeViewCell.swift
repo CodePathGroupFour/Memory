@@ -10,7 +10,10 @@ import UIKit
 
 class HomeViewCell: UITableViewCell {
 
+    @IBOutlet weak var profileimg: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet weak var captionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
