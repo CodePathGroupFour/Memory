@@ -258,6 +258,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         geoRef.child("location").child("longitude").setValue(longitude)
         geoRef.child("location").child("latitude").setValue(latitude)
         geoRef.child("location").child("postId").setValue(self.PostId!)
+        geoRef.child("location").child("name").setValue(user!.displayName)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
