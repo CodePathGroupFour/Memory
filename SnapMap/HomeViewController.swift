@@ -12,10 +12,13 @@ import FirebaseAuth
 import FirebaseStorage
 import Firebase
 import FirebaseDatabase
+import MapKit
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate {
     
     @IBOutlet var tableView: UITableView!
+    
+    @IBOutlet weak var mapView: MKMapView!
     
     var snapUsers = [User]()
     var snapPosts = [Post]()
@@ -24,6 +27,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.isHidden = true
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -61,9 +65,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var postDictionary: NSDictionary = [:]
         
         FIRDatabase.database().reference().child("Post").observe(.childAdded, with: { (snapshot) in
-                let post = Post()
                 for childSnap in  snapshot.children.allObjects
                 {
+                    let post = Post()
+
                     let snap = childSnap as! FIRDataSnapshot
                     if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? NSDictionary
                     {
@@ -71,8 +76,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             postDictionary = (postInfo.value as? NSDictionary)!
                         }
                         
-                        print(snapVal)
-                        print(self.snapPosts.count)
+//                        print(postDictionary)
+//                        print(self.snapPosts.count)
 //                        if let latitude = snapVal["latitude"] {
 //                            post.latitude = latitude as! Double
 //                        }
@@ -118,10 +123,18 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     }
     
-    @IBAction func toMapView(_ sender: UIBarButtonItem) {
-        
-        
-    }
+//    @IBAction func toMapView(_ sender: UIBarButtonItem) {
+//        tableView.isHidden = true
+//        mapView.isHidden = false
+//        
+//    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toMapView" {
+//            let vc = segue.destination as! MapViewController
+//        }
+//        
+//    }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return snapPosts.count
@@ -133,6 +146,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell", for: indexPath) as! HomeViewCell
         print("runing tableView")
         let post = snapPosts[indexPath.row]
+        print(post)
 //        let imageRef = FIRStorage.storage().reference().child("\(post.postId!).png")
 //        imageRef.downloadURL { (Url: URL?, error: Error?) in
 //            if let error = error {

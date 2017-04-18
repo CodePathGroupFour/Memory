@@ -114,15 +114,21 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Map" id="zEm-bn-a3T">
                             <connections>
-                                <action selector="toMapView:" destination="MNJ-AN-2du" id="4q4-D3-2vM"/>
+                                <action selector="toMapView:" destination="MNJ-AN-2du" id="kTY-ca-5fb"/>
+                                <segue destination="6L8-gb-cTL" kind="push" identifier="toMapView" id="tUs-EW-cvL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="ZHV-zd-Q3o" id="pMC-FX-Scd"/>
                         <outlet property="tableView" destination="MYK-EC-acP" id="qgA-v7-vFi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1Y-24-jBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="ZHV-zd-Q3o">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="556"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </mapView>
             </objects>
             <point key="canvasLocation" x="1699.5" y="41.5"/>
         </scene>
@@ -307,6 +313,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wvz-Na-nh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="525.5" y="41.5"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="he5-xa-9ta">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lva-xm-fbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="6L8-gb-cTL" customClass="MapViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qpn-8D-OvC"/>
+                        <viewControllerLayoutGuide type="bottom" id="3io-Pt-whP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2dh-jq-LVO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Uyc-R3-uor">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7ZD-UL-EN9"/>
+                    <connections>
+                        <outlet property="mapView" destination="Uyc-R3-uor" id="ef2-nM-6yn"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2272.5" y="-711.5"/>
         </scene>
         <!--Snap-->
         <scene sceneID="eas-zt-fur">

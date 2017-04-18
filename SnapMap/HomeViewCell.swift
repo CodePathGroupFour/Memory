@@ -26,6 +26,7 @@ class HomeViewCell: UITableViewCell {
                 if let error = error {
                     print("Getting imageUrl error:\(error.localizedDescription)")
                 } else {
+                    print(Url)
                     self.postImage.setImageWith(Url!)
                 }
                 

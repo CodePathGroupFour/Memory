@@ -237,23 +237,23 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.PostId = imageName
         
         
-                            guard let uid = self.user?.uid else {
-                                return
-                            }
+        guard let uid = self.user?.uid else {
+            return
+        }
         
-                            // Create a reference to the file you want to upload
-                            let storageRef = FIRStorage.storage().reference().child("\(imageName).png")
+        // Create a reference to the file you want to upload
+        let storageRef = FIRStorage.storage().reference().child("\(imageName).png")
         
-                            if let uploadData = UIImagePNGRepresentation(pickedImage)
-                            {
-                                //let uid = self.user?.uid
-                                    storageRef.put(uploadData, metadata: nil) { metadata, error in
-                                    if let error = error {
-                                        // Uh-oh, an error occurred!
-                                        print(error.localizedDescription)
-                                    } else {
-                                        // Metadata contains file metadata such as size, content-type, and download URL.
-                                        print("upload seccessfully!")
+        if let uploadData = UIImagePNGRepresentation(pickedImage)
+        {
+            //let uid = self.user?.uid
+            storageRef.put(uploadData, metadata: nil) { metadata, error in
+                if let error = error {
+                    // Uh-oh, an error occurred!
+                    print(error.localizedDescription)
+                } else {
+                    // Metadata contains file metadata such as size, content-type, and download URL.
+                    print("upload seccessfully!")
 //                                        if let postImageURL = metadata!.downloadURL()?.absoluteString {
 //                                            let value = ["storageID \(imageName)"]
 //        
@@ -261,9 +261,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 //                                          
 //                                        }
                                         
-                                    }
-                                }
-                            }
+                }
+            }
+        }
     
 }
         
