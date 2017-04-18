@@ -13,20 +13,23 @@ import FirebaseStorage
 import Firebase
 import FirebaseDatabase
 
-class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView: UITableView!
     
     var snapUsers = [User]()
     var snapPosts = [Post]()
     
+//    var dbref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.dataSource = self
+        tableView.delegate = self
+        
         retrieveUsers()
         retrievePosts()
-        
         
     }
 
@@ -55,27 +58,43 @@ class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDel
     
     func retrievePosts()
     {
+        var postDictionary: NSDictionary = [:]
+        
         FIRDatabase.database().reference().child("Post").observe(.childAdded, with: { (snapshot) in
-            if let Postdictionary = snapshot.value as? [String: Any]
-            {
                 let post = Post()
                 for childSnap in  snapshot.children.allObjects
                 {
                     let snap = childSnap as! FIRDataSnapshot
                     if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? NSDictionary
                     {
-//                        print(snapVal)
-                        post.latitude = snapVal["latitude"] as! Double
-                        post.longitude = snapVal["longitude"] as! Double
-                        post.postId = snapVal["postId"] as! String
+                        for postInfo in snapVal {
+                            postDictionary = (postInfo.value as? NSDictionary)!
+                        }
+                        
+                        print(snapVal)
+                        print(self.snapPosts.count)
+//                        if let latitude = snapVal["latitude"] {
+//                            post.latitude = latitude as! Double
+//                        }
+                        post.latitude = postDictionary["latitude"] as! Double
+//                        if let longitude = snapVal["longitude"] {
+//                            post.longitude = longitude as! Double
+//                        }
+                        post.longitude = postDictionary["longitude"] as! Double
+//                        if let id = snapVal["postId"] {
+//                            post.postId = id as! String
+//                        }
+                        post.postId = postDictionary["postId"] as! String
                         self.snapPosts.append(post)
 //                        print(self.snapPosts[0].latitude)
 //                        print(self.snapPosts[0].longitude)
 //                        print(self.snapPosts[0].postId)
                     }
                 }
-            }
+                self.tableView.reloadData()
         })
+        
+        
     }
     
     
@@ -99,15 +118,32 @@ class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDel
     
     }
     
+    @IBAction func toMapView(_ sender: UIBarButtonItem) {
+        
+        
+    }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return snapUsers.count
+        return snapPosts.count
     }
     
     
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell") as! HomeViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell", for: indexPath) as! HomeViewCell
+        print("runing tableView")
+        let post = snapPosts[indexPath.row]
+//        let imageRef = FIRStorage.storage().reference().child("\(post.postId!).png")
+//        imageRef.downloadURL { (Url: URL?, error: Error?) in
+//            if let error = error {
+//                print("Getting imageUrl error:\(error.localizedDescription)")
+//            } else {
+//                cell.imageUrl = Url
+//            }
+//            
+//        }
+
+        cell.post = post
         
         return cell
     }

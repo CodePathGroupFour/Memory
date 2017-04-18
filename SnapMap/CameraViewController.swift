@@ -28,6 +28,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     var pickedImage:UIImage!
     var PostId: String!
     
+    var postCount: Int = 0
+    
     var dbref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
     let user = FIRAuth.auth()?.currentUser
     
@@ -181,11 +183,48 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+//    func retrievePosts()
+//    {
+//        FIRDatabase.database().reference().child("Post").observe(.childAdded, with: { (snapshot) in
+//            for childSnap in  snapshot.children
+//            {
+//                self.postCount = self.postCount + 1
+//                print("Post Count\(self.postCount)")
+//            }
+//        })
+//    }
+    
+    func ResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x:0, y:0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
-        pickedImage = originalImage
+        pickedImage = ResizeImage(image: originalImage, targetSize: CGSize(width: 200, height: 200))
         
         // Do something with the images (based on your use case)
         
@@ -205,7 +244,8 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                             // Create a reference to the file you want to upload
                             let storageRef = FIRStorage.storage().reference().child("\(imageName).png")
         
-                            if let uploadData = UIImagePNGRepresentation(pickedImage) {
+                            if let uploadData = UIImagePNGRepresentation(pickedImage)
+                            {
                                 //let uid = self.user?.uid
                                     storageRef.put(uploadData, metadata: nil) { metadata, error in
                                     if let error = error {
@@ -254,11 +294,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         annotation.title = String(describing: latitude)
         mapView.addAnnotation(annotation)
         
-        let geoRef = dbref.child("Post").child("userid: \(user!.uid)")
+        let geoRef = dbref.child("Post").child("userid: \(user!.uid)").childByAutoId()
         geoRef.child("location").child("longitude").setValue(longitude)
         geoRef.child("location").child("latitude").setValue(latitude)
         geoRef.child("location").child("postId").setValue(self.PostId!)
         geoRef.child("location").child("name").setValue(user!.displayName)
+        print("upload seccessfully!")
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

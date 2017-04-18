@@ -15,5 +15,7 @@ target 'SnapMap' do
     pod 'FBSDKLoginKit'
 
     pod 'AFNetworking'
+    
+    pod 'FirebaseUI/Storage'
 
 end
