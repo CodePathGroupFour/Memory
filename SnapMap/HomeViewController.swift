@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDel
     
     let lipsum : String = " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a dui lacinia, eleifend nisi eget, porta leo. Morbi interdum aliquet sapien id condimentum. Suspendisse sed ex turpis. Mauris feugiat massa ligula, in rutrum neque molestie ut. Vestibulum odio erat, congue et luctus scelerisque, sodales tincidunt metus. Curabitur quis est at enim ultrices dictum. Maecenas a quam sed turpis varius vehicula. Fusce vehicula, justo at mattis rhoncus, elit quam tempor est, at rutrum augue dui sit amet dui. Nulla facilisis blandit ex a auctor. "
     let staticURL = "https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/13010802_1113815145327097_2446720950146447670_n.jpg?oh=b22c109530027df1c86839b6662086f6&oe=594E74F8"
+    let staticPostImageURL = "https://hills.ccsf.edu/~elam3/tmp.jpg"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,9 @@ class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDel
         
         testTableView.delegate = self
         testTableView.dataSource = self
+        
+        testTableView.rowHeight = UITableViewAutomaticDimension
+        testTableView.estimatedRowHeight = 500
         
         if FIRAuth.auth()?.currentUser != nil {
             // User is signed in.
@@ -126,6 +130,7 @@ class HomeViewController: UIViewController, UITableViewDataSource,UITableViewDel
         cell.nameLabel.text = "Karen Tsang"
         cell.captionLabel.text = lipsum
         cell.profileimg.setImageWith(NSURL(string: staticURL) as! URL)
+        cell.postImage.setImageWith(NSURL(string: staticPostImageURL) as! URL)
         
         return cell
     }

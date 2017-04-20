@@ -15,9 +15,21 @@ class HomeViewCell: UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var captionLabel: UILabel!
     
+    /*didSet {
+        //cornerRadius
+        profileimg.layoutIfNeeded()
+        profileimg.layer.cornerRadius = 3
+        profileimg.clipsToBounds = true
+    }*/
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // test : cornerRadius
+        profileimg.layoutIfNeeded()
+        profileimg.layer.cornerRadius = 25
+        profileimg.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
