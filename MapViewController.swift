@@ -35,15 +35,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let post = Post()
-        print("??????????????????")
-        print(snapPosts.count)
         for post in snapPosts {
             locationsPickedLocation(latitude: post.latitude, longitude: post.longitude)
-            print("Putting pins")
-            print("!!!!!!!!!!!!!!!!!!")
         }
     }
+    
     func retrieveUsers()
     {
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in

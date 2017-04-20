@@ -224,7 +224,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
-        pickedImage = ResizeImage(image: originalImage, targetSize: CGSize(width: 200, height: 200))
+        pickedImage = ResizeImage(image: originalImage, targetSize: CGSize(width: 400, height:400))
         
         // Do something with the images (based on your use case)
         
@@ -232,7 +232,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true, completion: nil)
-        performSegue(withIdentifier: "tagSegue", sender: self)
+        performSegue(withIdentifier: "toCaptureView", sender: self)
         let imageName = NSUUID().uuidString
         self.PostId = imageName
         
@@ -282,8 +282,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let locationsViewController = segue.destination as! LocationsViewController
-        locationsViewController.delegate = self
+        let CaptureViewController = segue.destination as! CaptureViewController
+        
+        CaptureViewController.image = self.pickedImage
     }
     
     func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {

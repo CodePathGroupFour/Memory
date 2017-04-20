@@ -27,7 +27,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.isHidden = true
+        
+        mapView.alpha = 0
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -40,6 +41,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        for post in snapPosts {
+            locationsPickedLocation(latitude: post.latitude, longitude: post.longitude)
+        }
     }
     
     func retrieveUsers()
@@ -74,6 +81,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     {
                         for postInfo in snapVal {
                             postDictionary = (postInfo.value as? NSDictionary)!
+                            print(postDictionary)
                         }
                         
 //                        print(postDictionary)
@@ -123,11 +131,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     }
     
-//    @IBAction func toMapView(_ sender: UIBarButtonItem) {
-//        tableView.isHidden = true
-//        mapView.isHidden = false
-//        
-//    }
+    @IBAction func toMapView(_ sender: UIBarButtonItem) {
+        tableView.alpha = 0
+        mapView.alpha = 1
+        print("switch to mapview")
+        
+    }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "toMapView" {
@@ -161,7 +170,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         return cell
     }
-        /*
+    
+    func locationsPickedLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        
+        let annotation = MKPointAnnotation()
+        let locationCoordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
+        annotation.coordinate = locationCoordinate
+        annotation.title = String(describing: latitude)
+        mapView.addAnnotation(annotation)
+    }
+    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

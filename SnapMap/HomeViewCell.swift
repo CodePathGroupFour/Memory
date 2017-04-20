@@ -21,13 +21,14 @@ class HomeViewCell: UITableViewCell {
     
     var post: Post! {
         didSet {
-            let imageRef = FIRStorage.storage().reference().child("\(post.postId!).png")
+            let imageRef = FIRStorage.storage().reference().child("\(post!.postId!).png")
             imageRef.downloadURL { (Url: URL?, error: Error?) in
                 if let error = error {
                     print("Getting imageUrl error:\(error.localizedDescription)")
                 } else {
                     print(Url)
                     self.postImage.setImageWith(Url!)
+                    
                 }
                 
             }

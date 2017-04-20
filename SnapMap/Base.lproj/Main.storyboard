@@ -115,7 +115,6 @@
                         <barButtonItem key="rightBarButtonItem" title="Map" id="zEm-bn-a3T">
                             <connections>
                                 <action selector="toMapView:" destination="MNJ-AN-2du" id="kTY-ca-5fb"/>
-                                <segue destination="6L8-gb-cTL" kind="push" identifier="toMapView" id="tUs-EW-cvL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -131,6 +130,55 @@
                 </mapView>
             </objects>
             <point key="canvasLocation" x="1699.5" y="41.5"/>
+        </scene>
+        <!--Capture View Controller-->
+        <scene sceneID="ndD-Sp-yvF">
+            <objects>
+                <viewController id="IlX-vc-RTe" customClass="CaptureViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nfu-c2-Pbm"/>
+                        <viewControllerLayoutGuide type="bottom" id="HUZ-T1-8pf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wlS-LL-pGv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SM5-g7-9lV">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K0N-fS-W3h">
+                                <rect key="frame" x="0.0" y="64" width="375" height="256"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LBr-XR-d4F">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="IqO-px-cW2">
+                            <connections>
+                                <action selector="onCancelButton:" destination="IlX-vc-RTe" id="j9i-DL-cHa"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="SWn-wZ-kcM">
+                            <connections>
+                                <action selector="toLocationView:" destination="IlX-vc-RTe" id="D2W-oc-tc9"/>
+                                <segue destination="wPm-FN-cF9" kind="push" id="yjM-Xj-Mhi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="captureImage" destination="SM5-g7-9lV" id="2xz-Jh-gbm"/>
+                        <outlet property="captureText" destination="K0N-fS-W3h" id="Eir-ZQ-1Ar"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="phi-5R-ZaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3308.5" y="42.5"/>
         </scene>
         <!--Take a Photo-->
         <scene sceneID="Ohs-A9-Dr5">
@@ -175,7 +223,7 @@
                         <outlet property="captureImageView" destination="2eR-AJ-Ofz" id="rzU-Wb-ebA"/>
                         <outlet property="mapView" destination="DWI-cX-DOI" id="QbA-mt-DBX"/>
                         <outlet property="previewView" destination="82E-ag-ujq" id="tyb-0i-gZz"/>
-                        <segue destination="wPm-FN-cF9" kind="push" identifier="tagSegue" id="8m5-oM-ix5"/>
+                        <segue destination="IlX-vc-RTe" kind="push" identifier="toCaptureView" id="yzF-av-kso"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fEl-5g-XKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -250,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6o4-PA-vwQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3311.5" y="40.5"/>
+            <point key="canvasLocation" x="3820" y="42"/>
         </scene>
         <!--My Profile-->
         <scene sceneID="EQr-vE-avu">
@@ -317,7 +365,6 @@
         <!--Map View Controller-->
         <scene sceneID="he5-xa-9ta">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lva-xm-fbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="6L8-gb-cTL" customClass="MapViewController" customModule="SnapMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qpn-8D-OvC"/>
@@ -339,6 +386,7 @@
                         <outlet property="mapView" destination="Uyc-R3-uor" id="ef2-nM-6yn"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lva-xm-fbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2272.5" y="-711.5"/>
         </scene>

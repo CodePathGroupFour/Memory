@@ -10,6 +10,7 @@
 		136CBCE01E9F017D00B14ECB /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136CBCDF1E9F017D00B14ECB /* HomeViewCell.swift */; };
 		13B64F621E88395A00913B4B /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B64F611E88395A00913B4B /* CameraViewController.swift */; };
 		13C6D8F61EA5A8430048D759 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C6D8F51EA5A8430048D759 /* MapViewController.swift */; };
+		13C6D8F81EA83D3A0048D759 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C6D8F71EA83D3A0048D759 /* CaptureViewController.swift */; };
 		2CB9E66EF74CA35897075DB8 /* Pods_SnapMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34EA1322605CA4E918EBD4F7 /* Pods_SnapMap.framework */; };
 		79C480A01E8C54A7005D67D6 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4809F1E8C54A7005D67D6 /* LocationViewController.swift */; };
 		79C480A31E8C5573005D67D6 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C480A21E8C5573005D67D6 /* LocationCell.swift */; };
@@ -29,6 +30,7 @@
 		136CBCDF1E9F017D00B14ECB /* HomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		13B64F611E88395A00913B4B /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		13C6D8F51EA5A8430048D759 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
+		13C6D8F71EA83D3A0048D759 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		34EA1322605CA4E918EBD4F7 /* Pods_SnapMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C4809F1E8C54A7005D67D6 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		79C480A21E8C5573005D67D6 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				9622E8671E863F3C001B25B2 /* ProfileViewController.swift */,
 				13B64F611E88395A00913B4B /* CameraViewController.swift */,
 				79C4809F1E8C54A7005D67D6 /* LocationViewController.swift */,
+				13C6D8F71EA83D3A0048D759 /* CaptureViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13C6D8F61EA5A8430048D759 /* MapViewController.swift in Sources */,
+				13C6D8F81EA83D3A0048D759 /* CaptureViewController.swift in Sources */,
 				96664D101E82187C00BEE7F6 /* LoginViewController.swift in Sources */,
 				13B64F621E88395A00913B4B /* CameraViewController.swift in Sources */,
 				9608B3511E78BE80008CFECB /* AppDelegate.swift in Sources */,
