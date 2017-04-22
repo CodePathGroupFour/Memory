@@ -22,7 +22,6 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-
     
     var results: NSArray = []
     

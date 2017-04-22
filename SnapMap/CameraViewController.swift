@@ -14,7 +14,7 @@ import FirebaseStorage
 import Firebase
 import MapKit
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate, MKMapViewDelegate  {
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MKMapViewDelegate  {
 
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var captureImageView: UIImageView!
@@ -285,23 +285,25 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let CaptureViewController = segue.destination as! CaptureViewController
         
         CaptureViewController.image = self.pickedImage
+        CaptureViewController.postId = self.PostId
     }
     
-    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
-        
-        let annotation = MKPointAnnotation()
-        let locationCoordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
-        annotation.coordinate = locationCoordinate
-        annotation.title = String(describing: latitude)
-        mapView.addAnnotation(annotation)
-        
-        let geoRef = dbref.child("Post").child("userid: \(user!.uid)").childByAutoId()
-        geoRef.child("location").child("longitude").setValue(longitude)
-        geoRef.child("location").child("latitude").setValue(latitude)
-        geoRef.child("location").child("postId").setValue(self.PostId!)
-        geoRef.child("location").child("name").setValue(user!.displayName)
-        print("upload seccessfully!")
-    }
+//    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber, text: String) {
+//        
+//        let annotation = MKPointAnnotation()
+//        let locationCoordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
+//        annotation.coordinate = locationCoordinate
+//        annotation.title = String(describing: latitude)
+//        mapView.addAnnotation(annotation)
+//        
+//        let geoRef = dbref.child("Post").child("userid: \(user!.uid)").childByAutoId()
+//        geoRef.child("location").child("longitude").setValue(longitude)
+//        geoRef.child("location").child("latitude").setValue(latitude)
+//        geoRef.child("location").child("postId").setValue(self.PostId!)
+//        geoRef.child("location").child("name").setValue(user!.displayName)
+//        geoRef.child("location").child("latitude").setValue(text)
+//        print("upload seccessfully!")
+//    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "myAnnotationView"

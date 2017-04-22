@@ -115,6 +115,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Map" id="zEm-bn-a3T">
                             <connections>
                                 <action selector="toMapView:" destination="MNJ-AN-2du" id="kTY-ca-5fb"/>
+                                <segue destination="6L8-gb-cTL" kind="push" id="KXb-qE-6a4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -144,15 +145,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SM5-g7-9lV">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="347"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="K0N-fS-W3h">
-                                <rect key="frame" x="0.0" y="64" width="375" height="256"/>
+                                <rect key="frame" x="16" y="64" width="343" height="347"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -166,8 +168,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Submit" id="SWn-wZ-kcM">
                             <connections>
-                                <action selector="toLocationView:" destination="IlX-vc-RTe" id="D2W-oc-tc9"/>
-                                <segue destination="wPm-FN-cF9" kind="push" id="yjM-Xj-Mhi"/>
+                                <segue destination="wPm-FN-cF9" kind="push" identifier="toMapView" id="O82-Iv-lOe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -393,7 +394,7 @@
         <!--Snap-->
         <scene sceneID="eas-zt-fur">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZcQ-sl-bjW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="takeAPhoto" automaticallyAdjustsScrollViewInsets="NO" id="ZcQ-sl-bjW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Snap" image="Compact Camera" selectedImage="Compact Camera" id="ei6-dI-h6J"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WN3-ib-rjm">

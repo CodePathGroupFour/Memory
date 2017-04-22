@@ -10,18 +10,23 @@ import UIKit
 import FirebaseStorage
 import Firebase
 
-class CaptureViewController: UIViewController {
+class CaptureViewController: UIViewController, LocationsViewControllerDelegate {
 
     @IBOutlet weak var captureImage: UIImageView!
     @IBOutlet weak var captureText: UITextView!
     
     var image: UIImage!
     
+    var dbref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
+    let user = FIRAuth.auth()?.currentUser
+    var postId: String!
+    var text: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let text = captureText.text
-        
+        captureImage.image = image
+        text = captureText.text
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,22 +34,34 @@ class CaptureViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onCancelButton(for segue: UIStoryboardSegue,_ sender: UIBarButtonItem) {
-        
-        _ = segue.destination as! HomeViewController
-        
+    @IBAction func onCancelButton(_ sender: UIBarButtonItem) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeViewController")
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func toLocationView(for segue: UIStoryboardSegue, _ sender: UIBarButtonItem) {
-        //let segue: UIStoryboardSegue
-        let locationsViewController = segue.destination as! LocationsViewController
-        locationsViewController.delegate = self as! LocationsViewControllerDelegate
-    }
-//    override func prepare(for segue: UIStoryboardSegue, sender: UIBarButtonItem?) {
+//    @IBAction func toLocationView(for segue: UIStoryboardSegue, _ sender: UIBarButtonItem) {
 //        let locationsViewController = segue.destination as! LocationsViewController
-//        locationsViewController.delegate = self as! LocationsViewControllerDelegate
+//
+//        locationsViewController.delegate = self
 //    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMapView" {
+        let locationsViewController = segue.destination as! LocationsViewController
+        locationsViewController.delegate = self
+        }
+    }
 
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+        
+        let geoRef = dbref.child("Post").child("userid: \(user!.uid)").childByAutoId()
+        geoRef.child("location").child("longitude").setValue(longitude)
+        geoRef.child("location").child("latitude").setValue(latitude)
+        geoRef.child("location").child("postId").setValue(self.postId)
+        geoRef.child("location").child("name").setValue(user!.displayName)
+        geoRef.child("location").child("text").setValue(text)
+        print("upload seccessfully!")
+    }
+    
     /*
     // MARK: - Navigation
 

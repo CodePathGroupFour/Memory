@@ -86,19 +86,29 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         
 //                        print(postDictionary)
 //                        print(self.snapPosts.count)
-//                        if let latitude = snapVal["latitude"] {
-//                            post.latitude = latitude as! Double
-//                        }
-                        post.latitude = postDictionary["latitude"] as! Double
-//                        if let longitude = snapVal["longitude"] {
-//                            post.longitude = longitude as! Double
-//                        }
-                        post.longitude = postDictionary["longitude"] as! Double
-//                        if let id = snapVal["postId"] {
-//                            post.postId = id as! String
-//                        }
-                        post.postId = postDictionary["postId"] as! String
+                        if let latitude = postDictionary["latitude"] {
+                            post.latitude = latitude as! Double
+                        }
+//                        post.latitude = postDictionary["latitude"] as! Double
+                        
+                        if let longitude = postDictionary["longitude"] {
+                            post.longitude = longitude as! Double
+                        }
+//                        post.longitude = postDictionary["longitude"] as! Double
+                        
+                        if let id = postDictionary["postId"] {
+                            post.postId = id as! String
+                        }
+                        
+                        if let text = postDictionary["text"] {
+                            post.text = text as! String
+                        }
+                        
                         self.snapPosts.append(post)
+                        
+//                        post.postId = postDictionary["postId"] as! String
+//                        post.text = postDictionary["text"] as! String
+                        
 //                        print(self.snapPosts[0].latitude)
 //                        print(self.snapPosts[0].longitude)
 //                        print(self.snapPosts[0].postId)

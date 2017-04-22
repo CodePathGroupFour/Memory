@@ -69,6 +69,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if shortcutItem.type == "com.traning.takePhotos" {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let cameraVc = sb.instantiateViewController(withIdentifier: "tabbarcontroller") as! UITabBarController
+            cameraVc.selectedIndex = 1
+            let root = UIApplication.shared.keyWindow?.rootViewController
+            
+            root?.present(cameraVc, animated: false, completion: { () -> Void in
+                completionHandler(true)
+            })
+            
+        }
+    }
 }
 
