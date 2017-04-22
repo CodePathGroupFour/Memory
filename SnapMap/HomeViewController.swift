@@ -167,7 +167,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell", for: indexPath) as! HomeViewCell
         print("runing tableView")
         let post = snapPosts[indexPath.row]
-        print(post)
+        //print(post)
 //        let imageRef = FIRStorage.storage().reference().child("\(post.postId!).png")
 //        imageRef.downloadURL { (Url: URL?, error: Error?) in
 //            if let error = error {

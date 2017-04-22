@@ -8,14 +8,15 @@
 
 
 import UIKit
+import Firebase
 
-protocol LocationsViewControllerDelegate: class {
-    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
-}
+//protocol LocationsViewControllerDelegate: class {
+//    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
+//}
 
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-    weak var delegate: LocationsViewControllerDelegate!
+//    weak var delegate: LocationsViewControllerDelegate!
     
     let CLIENT_ID = "QA1L0Z0ZNA2QVEEDHFPQWK0I5F1DE3GPLSNW4BZEBGJXUCFL"
     let CLIENT_SECRET = "W2AOE1TYC4MHK5SZYOUGX0J3LVRALMPB4CXT3ZH21ZCPUMCU"
@@ -25,12 +26,18 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var results: NSArray = []
     
+    var dbref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
+    let user = FIRAuth.auth()?.currentUser
+    var postId: String!
+    var text: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,19 +64,15 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         let lat = venue.value(forKeyPath: "location.lat") as! NSNumber
         let lng = venue.value(forKeyPath: "location.lng") as! NSNumber
         
-        let latString = "\(lat)"
-        let lngString = "\(lng)"
+//        let latString = "\(lat)"
+//        let lngString = "\(lng)"
         
-        print(latString + " " + lngString)
+//        print(latString + " " + lngString)
         
+        locationsPickedLocation(controller: self, latitude: lat, longitude: lng)
         
-        
-        
-        delegate.locationsPickedLocation(controller: self, latitude: lat, longitude: lng)
-        
-        // Return to the PhotoMapViewController
-        navigationController?.popViewController(animated: true)
-        
+        // Return to the HomeViewController
+        performSegue(withIdentifier: "backToHomeView", sender: self)
     }
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -111,6 +114,15 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         task.resume()
     }
     
-    
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+        
+        let geoRef = dbref.child("Post").child("userid: \(user!.uid)").childByAutoId()
+        geoRef.child("location").child("longitude").setValue(longitude)
+        geoRef.child("location").child("latitude").setValue(latitude)
+        geoRef.child("location").child("postId").setValue(self.postId)
+        geoRef.child("location").child("name").setValue(user!.displayName)
+        geoRef.child("location").child("text").setValue(self.text)
+        print("upload seccessfully!")
+    }
 }
 

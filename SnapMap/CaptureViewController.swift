@@ -10,7 +10,7 @@ import UIKit
 import FirebaseStorage
 import Firebase
 
-class CaptureViewController: UIViewController, LocationsViewControllerDelegate {
+class CaptureViewController: UIViewController {
 
     @IBOutlet weak var captureImage: UIImageView!
     @IBOutlet weak var captureText: UITextView!
@@ -26,7 +26,7 @@ class CaptureViewController: UIViewController, LocationsViewControllerDelegate {
         super.viewDidLoad()
 
         captureImage.image = image
-        text = captureText.text
+        captureText.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,21 +46,24 @@ class CaptureViewController: UIViewController, LocationsViewControllerDelegate {
 //    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMapView" {
-        let locationsViewController = segue.destination as! LocationsViewController
-        locationsViewController.delegate = self
+            text = captureText.text
+            let locationsViewController = segue.destination as! LocationsViewController
+            //locationsViewController.delegate = self
+            locationsViewController.postId = self.postId
+            locationsViewController.text = self.text
         }
     }
 
-    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
-        
-        let geoRef = dbref.child("Post").child("userid: \(user!.uid)").childByAutoId()
-        geoRef.child("location").child("longitude").setValue(longitude)
-        geoRef.child("location").child("latitude").setValue(latitude)
-        geoRef.child("location").child("postId").setValue(self.postId)
-        geoRef.child("location").child("name").setValue(user!.displayName)
-        geoRef.child("location").child("text").setValue(text)
-        print("upload seccessfully!")
-    }
+//    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+//        
+//        let geoRef = dbref.child("Post").child("userid: \(user!.uid)").childByAutoId()
+//        geoRef.child("location").child("longitude").setValue(longitude)
+//        geoRef.child("location").child("latitude").setValue(latitude)
+//        geoRef.child("location").child("postId").setValue(self.postId)
+//        geoRef.child("location").child("name").setValue(user!.displayName)
+//        geoRef.child("location").child("text").setValue(text)
+//        print("upload seccessfully!")
+//    }
     
     /*
     // MARK: - Navigation
