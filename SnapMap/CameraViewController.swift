@@ -232,10 +232,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true, completion: nil)
-        performSegue(withIdentifier: "toCaptureView", sender: self)
+        
         let imageName = NSUUID().uuidString
         self.PostId = imageName
-        
+        performSegue(withIdentifier: "toCaptureView", sender: self)
         
         guard let uid = self.user?.uid else {
             return

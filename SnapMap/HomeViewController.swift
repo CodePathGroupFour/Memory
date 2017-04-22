@@ -28,14 +28,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView.alpha = 0
+        //mapView.alpha = 0
         
-        tableView.dataSource = self
         tableView.delegate = self
+        tableView.dataSource = self
+        
         
         retrieveUsers()
         retrievePosts()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,11 +43,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        for post in snapPosts {
-            locationsPickedLocation(latitude: post.latitude, longitude: post.longitude)
-        }
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        for post in snapPosts {
+//            locationsPickedLocation(latitude: post.latitude, longitude: post.longitude)
+//        }
+//    }
     
     func retrieveUsers()
     {
@@ -77,6 +77,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let post = Post()
 
                     let snap = childSnap as! FIRDataSnapshot
+                    
                     if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? NSDictionary
                     {
                         for postInfo in snapVal {
@@ -105,7 +106,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         }
                         
                         self.snapPosts.append(post)
-                        
+                        //DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        //}
+                        //self.tableView.reloadData()
 //                        post.postId = postDictionary["postId"] as! String
 //                        post.text = postDictionary["text"] as! String
                         
@@ -114,10 +118,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //                        print(self.snapPosts[0].postId)
                     }
                 }
-                self.tableView.reloadData()
         })
-        
-        
     }
     
     
@@ -157,6 +158,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return snapPosts.count
+        
     }
     
     
