@@ -115,7 +115,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Map" id="zEm-bn-a3T">
                             <connections>
                                 <action selector="toMapView:" destination="MNJ-AN-2du" id="kTY-ca-5fb"/>
-                                <segue destination="6L8-gb-cTL" kind="push" id="KXb-qE-6a4"/>
+                                <segue destination="6L8-gb-cTL" kind="push" identifier="toMapView" id="KXb-qE-6a4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -463,6 +463,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="utb-hC-ByP"/>
+        <segue reference="tM2-Hi-Z8S"/>
     </inferredMetricsTieBreakers>
 </document>

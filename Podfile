@@ -16,6 +16,6 @@ target 'SnapMap' do
 
     pod 'AFNetworking'
     
-    pod 'FirebaseUI/Storage'
+    pod 'MBProgressHUD'
 
 end

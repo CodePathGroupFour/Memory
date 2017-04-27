@@ -13,6 +13,7 @@ import FirebaseStorage
 import Firebase
 import FirebaseDatabase
 import MapKit
+import MBProgressHUD
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate {
     
@@ -23,19 +24,30 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var snapUsers = [User]()
     var snapPosts = [Post]()
     
+    var photoUrl = [URL]()
+    
 //    var dbref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //mapView.alpha = 0
+        // Initialize a UIRefreshControl
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction), for: UIControlEvents.valueChanged)
+        // add refresh control to table view
+        tableView.insertSubview(refreshControl, at: 0)
         
         tableView.delegate = self
         tableView.dataSource = self
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         
         retrieveUsers()
         retrievePosts()
+        
+        MBProgressHUD.hide(for: self.view, animated: true)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -109,16 +121,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         //DispatchQueue.main.async {
                             self.tableView.reloadData()
                         //}
-                        //self.tableView.reloadData()
-//                        post.postId = postDictionary["postId"] as! String
-//                        post.text = postDictionary["text"] as! String
-                        
-//                        print(self.snapPosts[0].latitude)
-//                        print(self.snapPosts[0].longitude)
-//                        print(self.snapPosts[0].postId)
                     }
                 }
         })
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        retrievePosts()
+        self.tableView.reloadData()
+        
+        // Tell the refreshControl to stop spinning
+        refreshControl.endRefreshing()
     }
     
     
@@ -149,12 +162,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toMapView" {
-//            let vc = segue.destination as! MapViewController
-//        }
-//        
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMapView" {
+            let vc = segue.destination as! MapViewController
+        }
+        
+    }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return snapPosts.count
@@ -165,7 +178,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell", for: indexPath) as! HomeViewCell
-        print("runing tableView")
         let post = snapPosts[indexPath.row]
         //print(post)
 //        let imageRef = FIRStorage.storage().reference().child("\(post.postId!).png")
@@ -183,14 +195,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    func locationsPickedLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        
-        let annotation = MKPointAnnotation()
-        let locationCoordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
-        annotation.coordinate = locationCoordinate
-        annotation.title = String(describing: latitude)
-        mapView.addAnnotation(annotation)
-    }
+//    func locationsPickedLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+//        
+//        let annotation = MKPointAnnotation()
+//        let locationCoordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
+//        annotation.coordinate = locationCoordinate
+//        annotation.title = String(describing: latitude)
+//        mapView.addAnnotation(annotation)
+//    }
     
     /*
     // MARK: - Navigation

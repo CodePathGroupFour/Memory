@@ -13,12 +13,6 @@ class HomeViewCell: UITableViewCell {
 
     @IBOutlet weak var postImage: UIImageView!
     
-//    var imageUrl: URL! {
-//        didSet {
-//            postImage.setImageWith(imageUrl)
-//        }
-//    }
-    
     var post: Post! {
         didSet {
             let imageRef = FIRStorage.storage().reference().child("\(post!.postId!).png")
@@ -26,7 +20,6 @@ class HomeViewCell: UITableViewCell {
                 if let error = error {
                     print("Getting imageUrl error:\(error.localizedDescription)")
                 } else {
-                    print(Url)
                     self.postImage.setImageWith(Url!)
                     
                 }
