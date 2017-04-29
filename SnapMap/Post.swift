@@ -14,5 +14,6 @@ class Post: NSObject {
     var longitude: Double!
     var latitude: Double!
     var text: String!
+    var name: String!
 
 }

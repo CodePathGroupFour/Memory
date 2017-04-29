@@ -41,6 +41,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 500
+        
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
         retrieveUsers()
@@ -68,7 +71,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             {
                 let user = User()
                 
-//                print(snapshot.value)
+                //print(snapshot.value)
                 user.name = userdictionary["name"] as! String
                 user.email = userdictionary["email"] as? String
                 user.profileURL = userdictionary["profileURL"] as? String
@@ -94,20 +97,20 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     {
                         for postInfo in snapVal {
                             postDictionary = (postInfo.value as? NSDictionary)!
-                            print(postDictionary)
+                            print("postDictionary: \(postDictionary)")
                         }
                         
-//                        print(postDictionary)
-//                        print(self.snapPosts.count)
+                        //print(postDictionary)
+                        //print(self.snapPosts.count)
                         if let latitude = postDictionary["latitude"] {
                             post.latitude = latitude as! Double
                         }
-//                        post.latitude = postDictionary["latitude"] as! Double
+                        //post.latitude = postDictionary["latitude"] as! Double
                         
                         if let longitude = postDictionary["longitude"] {
                             post.longitude = longitude as! Double
                         }
-//                        post.longitude = postDictionary["longitude"] as! Double
+                        //post.longitude = postDictionary["longitude"] as! Double
                         
                         if let id = postDictionary["postId"] {
                             post.postId = id as! String
@@ -115,6 +118,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         
                         if let text = postDictionary["text"] {
                             post.text = text as! String
+                        }
+                        
+                        if let name = postDictionary["name"] {
+                            post.name = name as! String
                         }
                         
                         self.snapPosts.append(post)
@@ -191,6 +198,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        }
 
         cell.post = post
+        cell.nameLabel.text = post.name
+        cell.captionLabel.text = post.text
         
         return cell
     }
