@@ -201,6 +201,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.nameLabel.text = post.name
         cell.captionLabel.text = post.text
         
+        // Retrieve User Profile Image
+        for user in snapUsers {
+            if user.name == post.name {
+                let profileURL = user.profileURL
+                cell.profileImg.setImageWith(URL(string: profileURL!)!)
+            }
+        }
+        
         return cell
     }
     
