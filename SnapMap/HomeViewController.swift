@@ -24,6 +24,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var snapUsers = [User]()
     var snapPosts = [Post]()
     
+    var newPosts = [Post]()
+    
     var photoUrl = [URL]()
     
 //    var dbref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
@@ -185,7 +187,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell", for: indexPath) as! HomeViewCell
-        let post = snapPosts[indexPath.row]
+        newPosts = snapPosts.reversed()
+        let post = newPosts[indexPath.row]
         //print(post)
 //        let imageRef = FIRStorage.storage().reference().child("\(post.postId!).png")
 //        imageRef.downloadURL { (Url: URL?, error: Error?) in
