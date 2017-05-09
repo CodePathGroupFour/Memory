@@ -27,6 +27,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var photoUrl = [URL]()
     
+    
+    
 //    var dbref = FIRDatabase.database().reference(fromURL: "https://snapmap-e45c3.firebaseio.com/")
 
     override func viewDidLoad() {
@@ -52,18 +54,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         MBProgressHUD.hide(for: self.view, animated: true)
         
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(leftSwipe(_ :)))
+        leftSwipe.direction = .left
+        view.addGestureRecognizer(leftSwipe)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        for post in snapPosts {
-//            locationsPickedLocation(latitude: post.latitude, longitude: post.longitude)
-//        }
-//    }
     
     func retrieveUsers()
     {
@@ -101,17 +100,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             print("postDictionary: \(postDictionary)")
                         }
                         
-                        //print(postDictionary)
-                        //print(self.snapPosts.count)
                         if let latitude = postDictionary["latitude"] {
                             post.latitude = latitude as! Double
                         }
-                        //post.latitude = postDictionary["latitude"] as! Double
                         
                         if let longitude = postDictionary["longitude"] {
                             post.longitude = longitude as! Double
                         }
-                        //post.longitude = postDictionary["longitude"] as! Double
                         
                         if let id = postDictionary["postId"] {
                             post.postId = id as! String
@@ -126,9 +121,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         }
                         
                         self.snapPosts.append(post)
-                        //DispatchQueue.main.async {
+                        DispatchQueue.main.async {
                             self.tableView.reloadData()
-                        //}
+                        }
                     }
                 }
         })
@@ -140,6 +135,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // Tell the refreshControl to stop spinning
         refreshControl.endRefreshing()
+    }
+    
+    func leftSwipe(_ sender: UISwipeGestureRecognizer) {
+        if (sender.direction == .left) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tabVc = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! UITabBarController
+            tabVc.selectedIndex = 1
+            self.present(tabVc, animated: false, completion: nil)
+            print("Can swipe")
+        }
+        
     }
     
     
@@ -172,7 +178,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMapView" {
-            let vc = segue.destination as! MapViewController
+            _ = segue.destination as! MapViewController
         }
         
     }
@@ -188,16 +194,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell", for: indexPath) as! HomeViewCell
         newPosts = snapPosts.reversed()
         let post = newPosts[indexPath.row]
-        //print(post)
-//        let imageRef = FIRStorage.storage().reference().child("\(post.postId!).png")
-//        imageRef.downloadURL { (Url: URL?, error: Error?) in
-//            if let error = error {
-//                print("Getting imageUrl error:\(error.localizedDescription)")
-//            } else {
-//                cell.imageUrl = Url
-//            }
-//            
-//        }
 
         cell.post = post
         cell.nameLabel.text = post.name
@@ -213,24 +209,5 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         return cell
     }
-    
-//    func locationsPickedLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-//        
-//        let annotation = MKPointAnnotation()
-//        let locationCoordinate = CLLocationCoordinate2D(latitude: latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees)
-//        annotation.coordinate = locationCoordinate
-//        annotation.title = String(describing: latitude)
-//        mapView.addAnnotation(annotation)
-//    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -45,11 +45,29 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let region = MKCoordinateRegion(center: mapCenter, span: mapSpan)
         // Set animated property to true to animate the transition to the region
         mapView.setRegion(region, animated: false)
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_ :)))
+        view.addGestureRecognizer(swipe)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func handleSwipe(_ sender: UISwipeGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabVc = storyboard.instantiateViewController(withIdentifier: "tabbarcontroller") as! UITabBarController
+        if (sender.direction == .left) {
+            tabVc.selectedIndex = 2
+        }
+        
+        if(sender.direction == .right) {
+            tabVc.selectedIndex = 0
+        }
+        
+        self.present(tabVc, animated: false, completion: nil)
+        
     }
     
     @IBAction func cameraButtonPressed(_ sender: UIButton) {
@@ -106,9 +124,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage
+        let image = editedImage
+        if image != nil {
+            pickedImage = ResizeImage(image: image!, targetSize: CGSize(width: 400, height:400))
+        } else {
+            pickedImage = ResizeImage(image: originalImage, targetSize: CGSize(width: 400, height:400))
+        }
         
-        pickedImage = ResizeImage(image: originalImage, targetSize: CGSize(width: 400, height:400))
         
         // Do something with the images (based on your use case)
         
@@ -121,7 +144,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.PostId = imageName
         performSegue(withIdentifier: "toCaptureView", sender: self)
         
-        guard let uid = self.user?.uid else {
+        guard (self.user?.uid) != nil else {
             return
         }
         

@@ -15,20 +15,18 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-
+    
     var snapUsers = [User]()
     var snapPosts = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         retrieveUsers()
         retrievePosts()
         
-        
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,20 +72,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         postDictionary = (postInfo.value as? NSDictionary)!
                     }
                     
-//                    print(postDictionary)
-//                    print(self.snapPosts.count)
+                    //                    print(postDictionary)
+                    //                    print(self.snapPosts.count)
                     if let latitude = postDictionary["latitude"] {
                         post.latitude = latitude as! Double
                     }
-//                    post.latitude = postDictionary["latitude"] as! Double
+                    //                    post.latitude = postDictionary["latitude"] as! Double
                     if let longitude = postDictionary["longitude"] {
                         post.longitude = longitude as! Double
                     }
-//                    post.longitude = postDictionary["longitude"] as! Double
+                    //                    post.longitude = postDictionary["longitude"] as! Double
                     if let id = postDictionary["postId"] {
                         post.postId = id as! String
                     }
-//                    post.postId = postDictionary["postId"] as! String
+                    //                    post.postId = postDictionary["postId"] as! String
                     self.snapPosts.append(post)
                     //                        print(self.snapPosts[0].latitude)
                     //                        print(self.snapPosts[0].longitude)
@@ -105,15 +103,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         annotation.title = String(describing: latitude)
         mapView.addAnnotation(annotation)
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
