@@ -37,7 +37,7 @@ Here's a walkthrough of implemented user stories:
 
 ## License
 
-    Copyright [2017] [Edison Lam, Jayson Wong, Lum Situ]
+    Copyright [2017] [Edison Lam, Jason Wong, Lum Situ]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
